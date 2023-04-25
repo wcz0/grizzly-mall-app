@@ -4,8 +4,11 @@ import useUniapp from '@dcloudio/vite-plugin-uni'
 import useUniPages from '@uni-helper/vite-plugin-uni-pages'
 import useUniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import useUniMiddleware from '@uni-helper/vite-plugin-uni-middleware'
-import useUnocss from 'unocss/vite'
 import useEslint from 'vite-plugin-eslint'
+import components from 'unplugin-vue-components/vite'
+import autoImport from 'unplugin-auto-import/vite'
+import { VarletUIResolver } from 'unplugin-vue-components/resolvers'
+import useUnocss from 'unocss/vite'
 import {
   useProxy,
   proxyPort,
@@ -13,6 +16,7 @@ import {
   proxyURL,
   appBasePath,
 } from './src/configs/devServer.js'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -29,6 +33,16 @@ export default defineConfig({
     useUniMiddleware(),
     useUniapp(),
     useEslint(),
+    components({
+      resolvers: [VarletUIResolver()],
+    }),
+    autoImport({
+      resolvers: [
+        VarletUIResolver({
+          autoImport: true,
+        }),
+      ],
+    }),
   ],
   server: {
     host: true,

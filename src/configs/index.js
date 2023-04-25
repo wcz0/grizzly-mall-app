@@ -2,19 +2,20 @@
 const isProduction = process.env.NODE_ENV === 'production'
 const isH5 = process.env.UNI_PLATFORM === 'h5'
 
-export const title = 'vite-uniapp-template'
+export const title = import.meta.env.VITE_APP_TITLE || 'Grizzly Mall'
 
 export const company = {
-  name: 'vite-uniapp-template',
-  wechat: 'viarotel',
-  mail: 'viarotel@qq.com',
-  address: '河南省郑州市',
+  name: 'grizzly-mall',
+  wechat: 'wcz0',
+  mail: 'wcz0@qq.com',
+  address: '海南省海口',
 }
 
 // 项目基础路径
 export const appBasePath = isProduction ? './' : './'
 // 请求地址
-export const requestURL = 'http://192.168.0.186:9009/'
+// export const requestURL = 'http://crmeb/'
+export const requestURL = 'http://crmeb/'
 // export const requestURL = 'http://huishencloud.cn:9101/'
 
 // 是否开启代理
@@ -22,7 +23,7 @@ export const useProxy = isH5
 // 代理路径
 export const proxyPath = '/api'
 // 代理端口号
-export const proxyPort = 7777
+export const proxyPort = import.meta.env.VITE_PORT || 5400
 // 是否开启加密
 export const useEncrypt = false
 

@@ -6,12 +6,34 @@ export default definePages({
     autoscan: true,
     custom: {
       '^uni-(.*)': '@/uni_modules/uni-$1.vue',
-      '^u-(.*)': 'vk-uview-ui/components/u-$1/u-$1.vue',
     },
   },
   pages: [
     {
-      path: 'pages/login/phone/index',
+      path: 'pages/index/index',
+      shortcut: '/index',
+      style: {
+        // navigationBarTitleText: '项目简介',
+        navigationStyle: 'custom',
+        enablePullDownRefresh: true,
+        navigationBarBackgroundColor: '#ffffff',
+        navigationBarTextStyle: 'blue',
+        backgroundColorTop: 'F7F7F7',
+        backgroundColorBottom: 'F7F7F7',
+        onReachBottomDistance: 50,
+        'app-plus': {
+          titleNView: false,
+          pullToRefresh: {
+            support: true,
+            style: 'circle',
+            color: '#2B8AFF',
+          },
+          scrollIndicator: 'none',
+        },
+      },
+    },
+    {
+      path: 'pages/public/login',
       shortcut: '/login',
       style: {
         navigationBarTitleText: '',
@@ -20,15 +42,7 @@ export default definePages({
       },
     },
     {
-      path: 'pages/home/tab-0/index',
-      shortcut: '/tab-0',
-      style: {
-        navigationBarTitleText: '项目简介',
-        // navigationStyle: 'custom',
-      },
-    },
-    {
-      path: 'pages/home/tab-1/index',
+      path: 'pages/user/index',
       shortcut: '/tab-1',
       // middleware: ['permission'],
       style: {
@@ -36,27 +50,64 @@ export default definePages({
         navigationStyle: 'custom',
       },
     },
+    {
+      path: 'pages/category/index',
+      shortcut: '/category',
+      style: {
+        navigationBarTitleText: '分类',
+        navigationStyle: 'custom',
+      },
+    },
   ],
   // 分包配置
   subPackages: [
     {
-      root: 'pages/connect',
+      root: 'pages/public',
       pages: [
         {
-          path: 'index',
+          path: 'login',
           style: {
-            navigationBarTitleText: '联系我们',
+            navigationBarTitleText: '登录',
+          },
+        },
+        {
+          path: 'login-type',
+          style: {
+            navigationBarTitleText: '登录',
+          },
+        },
+        {
+          path: 'register',
+          style: {
+            navigationBarTitleText: '注册',
           },
         },
       ],
     },
     {
-      root: 'pages/statement',
+      root: 'pages/setting',
       pages: [
         {
           path: 'index',
           style: {
-            navigationBarTitleText: '特别声明',
+            navigationBarTitleText: '设置',
+          },
+        },
+      ],
+    },
+    {
+      root: 'pages/product',
+      pages: [
+        {
+          path: 'list',
+          style: {
+            navigationBarTitleText: '商品列表',
+          },
+        },
+        {
+          path: 'detail',
+          style: {
+            navigationBarTitleText: '详情',
           },
         },
       ],
@@ -71,20 +122,39 @@ export default definePages({
     },
   },
   tabBar: {
-    color: '#999999',
-    selectedColor: '#2b9939',
-    backgroundColor: '#F8F8F8',
+    color: '#999',
+    selectedColor: '#2B8AFF',
+    borderStyle: 'black',
+    backgroundColor: '#ffffff',
     list: [
       {
-        iconPath: 'static/images/tabbar/tab-0.png',
-        selectedIconPath: 'static/images/tabbar/tab-0-active.png',
-        pagePath: 'pages/home/tab-0/index',
+        iconPath: 'static/images/tabbar/tab-index.svg',
+        selectedIconPath: 'static/images/tabbar/tab-index-active.svg',
+        pagePath: 'pages/index/index',
         text: '首页',
       },
       {
-        iconPath: 'static/images/tabbar/tab-1.png',
-        selectedIconPath: 'static/images/tabbar/tab-1-active.png',
-        pagePath: 'pages/home/tab-1/index',
+        iconPath: 'static/images/tabbar/tab-category.svg',
+        selectedIconPath: 'static/images/tabbar/tab-category-active.svg',
+        pagePath: 'pages/category/index',
+        text: '分类',
+      },
+      {
+        iconPath: 'static/images/tabbar/tab-message.svg',
+        selectedIconPath: 'static/images/tabbar/tab-message-active.svg',
+        pagePath: 'pages/message/index',
+        text: '消息',
+      },
+      {
+        iconPath: 'static/images/tabbar/tab-cart.svg',
+        selectedIconPath: 'static/images/tabbar/tab-cart-active.svg',
+        pagePath: 'pages/cart/index',
+        text: '购物车',
+      },
+      {
+        iconPath: 'static/images/tabbar/tab-my.svg',
+        selectedIconPath: 'static/images/tabbar/tab-my-active.svg',
+        pagePath: 'pages/user/index',
         text: '我的',
       },
     ],
@@ -92,27 +162,27 @@ export default definePages({
   globalStyle: {
     navigationBarTextStyle: 'white',
     navigationBarTitleText: title,
-    navigationBarBackgroundColor: '#2b9939',
-    backgroundColor: '#F8F8F8',
+    navigationBarBackgroundColor: '#2B8AFF',
+    backgroundColor: '#F9F9F9',
   },
-  condition: {
-    current: 0,
-    list: [
-      {
-        name: 'pages/home/tab-0/index',
-        path: 'pages/home/tab-0/index',
-        query: '',
-      },
-      {
-        name: 'pages/statement/index',
-        path: 'pages/statement/index',
-        query: '',
-      },
-      {
-        name: 'pages/login/phone/index',
-        path: 'pages/login/phone/index',
-        query: '',
-      },
-    ],
-  },
+  // condition: {
+  //   current: 0,
+  //   list: [
+  //     {
+  //       name: 'pages/home/tab-0/index',
+  //       path: 'pages/home/tab-0/index',
+  //       query: '',
+  //     },
+  //     {
+  //       name: 'pages/statement/index',
+  //       path: 'pages/statement/index',
+  //       query: '',
+  //     },
+  //     {
+  //       name: 'pages/login/phone/index',
+  //       path: 'pages/login/phone/index',
+  //       query: '',
+  //     },
+  //   ],
+  // },
 })
